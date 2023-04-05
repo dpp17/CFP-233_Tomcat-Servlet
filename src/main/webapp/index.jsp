@@ -1,5 +1,6 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+<h2>Student Registration</h2>
+<a href = "Login.html">Click Here for Login</a>
 </body>
 </html>
