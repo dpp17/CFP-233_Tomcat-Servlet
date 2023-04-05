@@ -37,9 +37,16 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         boolean userResult = getValidation(username, ELogin.USERNAME_START_WITH_CAPITAL.getConstant()).find();
+        boolean passwordResult = getValidation(password, ELogin.PASSWORD_HAVE_ONE_SPECIAL_CHARACHTER.getConstant()).find();
 
-        if(!userResult){
-            errorPrint("Invalid Username",request,response);
+        if(!userResult || !passwordResult){
+            if(!userResult && !passwordResult){
+                errorPrint("Invalid Username and Password both",request,response);
+            } else if(!userResult){
+                errorPrint("Invalid Username",request,response);
+            } else {
+                errorPrint("Invalid Password",request,response);
+            }
         }else{
             if(username.equals("Durga") && password.equals("durga@dp12")){
                 HttpSession session = request.getSession();
@@ -51,7 +58,6 @@ public class LoginServlet extends HttpServlet {
                 errorPrint("Incorrect Credentials",request,response);
             }
         }
-
 
     }
 }
